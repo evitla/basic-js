@@ -6,7 +6,6 @@ const chainMaker = {
     return this.chains.split("~~").length;
   },
   addLink(value) {
-    console.log(this.chains)
     this.chains += !this.chains ? `( ${value} )` : `~~( ${value} )`
     return this;
   },
