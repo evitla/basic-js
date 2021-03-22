@@ -10,7 +10,6 @@ const chainMaker = {
     return this;
   },
   removeLink(position) {
-    console.log(this.getLength());
     if (position < 1 || position >= this.getLength()) {
       this.chains = "";
       throw new Error("ERROR");
