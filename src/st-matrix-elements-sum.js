@@ -1,5 +1,3 @@
-import { NotImplementedError } from '../extensions/index.js';
-
 /**
  * Given matrix, a rectangular matrix of integers,
  * just add up all the values that don't appear below a "0".
@@ -16,7 +14,12 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  * The result should be 9
  */
-export default function getMatrixElementsSum(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function getMatrixElementsSum(matrix) {
+  return matrix.reduce((acc, row, i) => {
+    if (i === 0) return row.reduce((a, b) => a + b, 0);
+    const prevRow = matrix[i - 1];
+    const rowSum = row.reduce((a, b, j) => (prevRow[j] !== 0 ? a + b : a), 0);
+
+    return acc + rowSum;
+  }, 0);
 }

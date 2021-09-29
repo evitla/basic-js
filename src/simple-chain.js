@@ -1,28 +1,33 @@
-import { NotImplementedError } from '../extensions/index.js';
-
 /**
  * Implement chainMaker object according to task description
  * 
  */
 export default {
+  chains: "",
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.chains.split("~~").length;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  addLink(value) {
+    this.chains += !this.chains ? `( ${value} )` : `~~( ${value} )`
+    return this;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink(position) {
+    if (!Number.isInteger(position) || position < 1 || position >= this.getLength()) {
+      this.chains = "";
+      throw new Error("You can't remove incorrect link!");
+    }
+    const arr = this.chains.split("~~");
+    arr.splice(position - 1, 1);
+    this.chains = arr.join("~~");
+    return this;
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.chains = this.chains.split("~~").reverse().join("~~");
+    return this;
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    const cache = this.chains;
+    this.chains = ""
+    return cache;
   }
 };
